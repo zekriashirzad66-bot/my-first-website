@@ -16,3 +16,11 @@
 .detail-row span{font-size:8px;letter-spacing:1.4px;color:var(--lime)}
 .detail-row strong{font-size:11px;line-height:1.5;color:#dce4dc;font-weight:500}
 @media(max-width:600px){.modal-tags{grid-template-columns:1fr 1fr}}
+
+/* Favorites and trailer actions */
+.poster{position:relative}
+.favorite-btn{position:absolute;z-index:4;right:12px;top:10px;width:32px;height:32px;border-radius:50%;border:1px solid #ffffff75;background:#0a100dcc;color:#fff;font-size:20px;line-height:1;cursor:pointer}
+.favorite-btn.saved{background:var(--lime);border-color:var(--lime);color:#101510}
+.trailer-btn{display:inline-flex;align-items:center;justify-content:center;margin-top:22px;padding:12px 16px;background:var(--lime);color:#101510;border-radius:5px;font-size:11px;font-weight:800}
+.trailer-btn:hover{filter:brightness(1.08)}
+body.ps .favorite-btn{right:auto;left:12px}

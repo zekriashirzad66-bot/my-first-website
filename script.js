@@ -21,6 +21,8 @@ const titles = [
 
 let language = "en";
 let activeFilter = "all";
+let favorites = [];
+try { favorites = JSON.parse(localStorage.getItem("frameXFavorites") || "[]"); } catch (_) { favorites = []; }
 const grid = document.getElementById("cardsGrid");
 const search = document.getElementById("searchInput");
 const modal = document.getElementById("detailModal");
@@ -28,12 +30,13 @@ const modal = document.getElementById("detailModal");
 function typeLabel(type){return language==="ps"?({anime:"انیمي",movie:"فلم",series:"سریال"}[type]):({anime:"ANIME",movie:"MOVIE",series:"SERIES"}[type]);}
 function render(){
  const q=search.value.trim().toLowerCase();
- const list=titles.filter(t=>(activeFilter==="all"||t.type===activeFilter) &&
+ const list=titles.filter(t=>(activeFilter==="all"||(activeFilter==="favorites"?favorites.includes(t.id):t.type===activeFilter)) &&
    [t.title,t.psTitle,t.genre,t.psGenre].join(" ").toLowerCase().includes(q));
  grid.innerHTML=list.map(t=>`
   <article class="title-card" data-id="${t.id}" tabindex="0" role="button" aria-label="${t.title}">
    <div class="poster" style="background:${t.tone}">
     <span class="poster-index">FX / ${String(t.id).padStart(3,"0")}</span>
+    <button class="favorite-btn ${favorites.includes(t.id)?"saved":""}" type="button" aria-label="${favorites.includes(t.id)?"Remove from favorites":"Add to favorites"}">${favorites.includes(t.id)?"★":"☆"}</button>
     <span class="poster-word">${t.art}</span><span class="poster-type">${typeLabel(t.type)}</span>
    </div>
    <div class="card-body"><div class="card-top"><span>${typeLabel(t.type)}</span><span>${t.year}</span></div>
@@ -44,6 +47,13 @@ function render(){
  grid.querySelectorAll(".title-card").forEach(card=>{
   card.addEventListener("click",()=>openDetails(Number(card.dataset.id)));
   card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetails(Number(card.dataset.id));}});
+  card.querySelector(".favorite-btn").addEventListener("click",e=>{
+   e.stopPropagation();
+   const id=Number(card.dataset.id);
+   favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
+   try { localStorage.setItem("frameXFavorites",JSON.stringify(favorites)); } catch (_) {}
+   render();
+  });
  });
 }
 function openDetails(id){
@@ -66,6 +76,9 @@ function openDetails(id){
   [detailLabels.rating,detailValues[2]],[detailLabels.audio,detailValues[3]],
   [detailLabels.subs,detailValues[4]]
  ].map(([label,value])=>`<div class="detail-row"><span>${label}</span><strong>${value}</strong></div>`).join("");
+ const trailer=document.getElementById("trailerLink");
+ trailer.href="https://www.youtube.com/results?search_query="+encodeURIComponent(t.title+" official trailer");
+ trailer.textContent=language==="ps"?"▶ رسمي ټریلر ولټوئ":"▶ Find official trailer";
  modal.classList.add("open");modal.setAttribute("aria-hidden","false");
 }
 function closeDetails(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");}

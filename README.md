@@ -18,3 +18,8 @@ This is an information catalogue. It does not host or stream films.
 
 ## Title details
 Each title card opens an information panel with its summary, genre, release year, audio-language note, subtitle note, and a rating status. Ratings are marked as unverified rather than showing invented scores; audio and subtitle availability can differ by release.
+
+## Favorites and trailers
+- Use the star on a title card to save or remove it from Favorites.
+- Favorites are saved in the visitor's browser using local storage.
+- Open a title and choose **Find official trailer** to search YouTube for that title's official trailer. Check the channel/source before watching; results are provided by YouTube.
