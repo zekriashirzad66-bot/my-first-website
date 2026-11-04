@@ -1,101 +1,90 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A bilingual guide to anime, movies and TV series.">
-  <title>FRAME — Anime, Movies & Series</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FRAME — discover anime, movies and series.">
+  <title>FRAME — Discover Stories</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="header">
-    <a class="logo" href="#home"><span class="logo-mark">F</span> FRAME<span class="logo-dot">.</span></a>
-    <nav class="nav" id="nav">
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">F</span>FRAME<span class="brand-dot">.</span></a>
+    <nav>
       <a href="#home" data-en="Home" data-ps="کور">Home</a>
-      <a href="#browse" data-en="Explore" data-ps="پلټنه">Explore</a>
+      <a href="#catalogue" data-en="Explore" data-ps="لټون">Explore</a>
       <a href="#about" data-en="About" data-ps="زموږ په اړه">About</a>
     </nav>
-    <div class="header-actions">
-      <button class="lang-btn" id="languageToggle" type="button" aria-label="Change language">پښتو</button>
-      <button class="menu-btn" id="menuToggle" type="button" aria-label="Open menu">☰</button>
-    </div>
+    <button class="lang-btn" id="langToggle" type="button">پښتو</button>
   </header>
 
-  <main id="home">
-    <section class="hero">
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-shade"></div>
       <div class="hero-content">
-        <p class="eyebrow"><span class="pulse"></span><span data-en="YOUR NEXT STORY STARTS HERE" data-ps="ستاسې بله کیسه له دې ځایه پیلېږي">YOUR NEXT STORY STARTS HERE</span></p>
-        <h1><span data-en="Stories worth" data-ps="د لیدلو وړ">Stories worth</span><br><em data-en="discovering." data-ps="کیسې ومومئ.">discovering.</em></h1>
-        <p class="hero-text" data-en="Explore anime, movies and series. Find your next favorite story in one place." data-ps="انیمې، فلمونه او سریالونه وپلټئ. خپله راتلونکې خوښه کیسه په یوه ځای کې ومومئ.">Explore anime, movies and series. Find your next favorite story in one place.</p>
-        <a class="primary-btn" href="#browse"><span data-en="Explore collection" data-ps="ټولګه وپلټئ">Explore collection</span> <b>↘</b></a>
+        <p class="eyebrow" data-en="YOUR NEXT STORY STARTS HERE" data-ps="ستاسې راتلونکې کیسه له دې ځایه پیلېږي">YOUR NEXT STORY STARTS HERE</p>
+        <h1 data-en="Stories worth<br>staying up for." data-ps="داسې کیسې چې<br>تر ناوخته یې ګورئ.">Stories worth<br>staying up for.</h1>
+        <p class="hero-copy" data-en="Explore a world of anime, movies and series — all in one place." data-ps="د انیمو، فلمونو او سریالونو نړۍ په یوه ځای کې وپلټئ.">Explore a world of anime, movies and series — all in one place.</p>
+        <a class="primary-btn" href="#catalogue" data-en="Explore library" data-ps="کتابتون وپلټئ">Explore library <span>↗</span></a>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="hero-tile tile-one">ANIME <span>01</span></div>
-        <div class="hero-tile tile-two">CINEMA <span>02</span></div>
-        <div class="hero-tile tile-three">SERIES <span>03</span></div>
-        <div class="hero-stamp">PLAY<br>YOUR<br>STORY</div>
-      </div>
-      <div class="hero-bottom"><span>FRAME / 2026</span><span data-en="A WORLD OF STORIES" data-ps="د کیسو یوه نړۍ">A WORLD OF STORIES</span></div>
+      <div class="hero-tag"><span class="live-dot"></span><span data-en="DISCOVER SOMETHING NEW" data-ps="یو نوی څه ومومئ">DISCOVER SOMETHING NEW</span></div>
     </section>
 
-    <section class="browse section" id="browse">
+    <section class="catalogue section-wrap" id="catalogue">
       <div class="section-heading">
-        <div><p class="eyebrow" data-en="THE COLLECTION" data-ps="ټولګه">THE COLLECTION</p>
-        <h2 data-en="Find your next watch." data-ps="د لیدلو لپاره خپله خوښه کیسه ومومئ.">Find your next watch.</h2></div>
-        <p class="section-note" data-en="A hand-picked starter list. More titles can be added anytime." data-ps="دا د پیل لپاره د څو غوره اثارو ټولګه ده. نور نومونه هر وخت ورزیاتېدای شي.">A hand-picked starter list. More titles can be added anytime.</p>
+        <div><p class="eyebrow green" data-en="THE COLLECTION" data-ps="ټولګه">THE COLLECTION</p>
+        <h2 data-en="Find your next favourite." data-ps="خپل راتلونکی خوښ اثر ومومئ.">Find your next favourite.</h2></div>
+        <span class="count" id="resultCount">06 TITLES</span>
       </div>
-
       <div class="tools">
-        <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search titles..." data-en-placeholder="Search titles..." data-ps-placeholder="د نومونو لټون..."></label>
-        <div class="filters" role="group" aria-label="Filter titles">
+        <div class="filters" role="group" aria-label="Categories">
           <button class="filter active" data-filter="all" data-en="All" data-ps="ټول">All</button>
           <button class="filter" data-filter="anime" data-en="Anime" data-ps="انیمې">Anime</button>
           <button class="filter" data-filter="movie" data-en="Movies" data-ps="فلمونه">Movies</button>
           <button class="filter" data-filter="series" data-en="Series" data-ps="سریالونه">Series</button>
         </div>
+        <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search titles..." data-en-placeholder="Search titles..." data-ps-placeholder="د اثارو لټون..."></label>
       </div>
 
-      <div class="grid" id="titleGrid">
-        <article class="card" data-category="anime" data-search="spirited away anime fantasy adventure">
-          <div class="poster poster-a"><span class="poster-label">ANIME</span><strong>SPIRITED<br>AWAY</strong><small>FANTASY · ADVENTURE</small></div>
-          <div class="card-info"><div><h3>Spirited Away</h3><p data-en="Anime film · 2001" data-ps="انیمې فلم · ۲۰۰۱">Anime film · 2001</p></div><span class="card-number">01</span></div>
+      <div class="grid" id="cardGrid">
+        <article class="card" data-category="anime" data-search="demon slayer anime action">
+          <div class="poster poster-one"><span class="poster-label">ANIME</span><span class="poster-art">鬼</span><span class="poster-caption">DEMON<br>SLAYER</span></div>
+          <div class="card-info"><div><h3>Demon Slayer</h3><p data-en="Action · Fantasy" data-ps="اکشن · خیال">Action · Fantasy</p></div><span class="year">2019</span></div>
         </article>
         <article class="card" data-category="movie" data-search="interstellar movie science fiction space">
-          <div class="poster poster-b"><span class="poster-label">MOVIE</span><strong>INTER<br>STELLAR</strong><small>SCI-FI · DRAMA</small></div>
-          <div class="card-info"><div><h3>Interstellar</h3><p data-en="Movie · 2014" data-ps="فلم · ۲۰۱۴">Movie · 2014</p></div><span class="card-number">02</span></div>
+          <div class="poster poster-two"><span class="poster-label">MOVIE</span><span class="poster-art">✦</span><span class="poster-caption">INTER<br>STELLAR</span></div>
+          <div class="card-info"><div><h3>Interstellar</h3><p data-en="Sci-Fi · Adventure" data-ps="ساینسي خیال · ماجرا">Sci-Fi · Adventure</p></div><span class="year">2014</span></div>
         </article>
-        <article class="card" data-category="series" data-search="planet earth documentary nature series">
-          <div class="poster poster-c"><span class="poster-label">SERIES</span><strong>PLANET<br>EARTH</strong><small>NATURE · DOCUMENTARY</small></div>
-          <div class="card-info"><div><h3>Planet Earth</h3><p data-en="Documentary series · 2006" data-ps="مستند سریال · ۲۰۰۶">Documentary series · 2006</p></div><span class="card-number">03</span></div>
+        <article class="card" data-category="series" data-search="stranger things series mystery">
+          <div class="poster poster-three"><span class="poster-label">SERIES</span><span class="poster-art">S</span><span class="poster-caption">STRANGER<br>THINGS</span></div>
+          <div class="card-info"><div><h3>Stranger Things</h3><p data-en="Mystery · Drama" data-ps="معما · ډرامه">Mystery · Drama</p></div><span class="year">2016</span></div>
         </article>
         <article class="card" data-category="anime" data-search="your name anime romance fantasy">
-          <div class="poster poster-d"><span class="poster-label">ANIME</span><strong>YOUR<br>NAME.</strong><small>ROMANCE · FANTASY</small></div>
-          <div class="card-info"><div><h3>Your Name</h3><p data-en="Anime film · 2016" data-ps="انیمې فلم · ۲۰۱۶">Anime film · 2016</p></div><span class="card-number">04</span></div>
+          <div class="poster poster-four"><span class="poster-label">ANIME</span><span class="poster-art">☄</span><span class="poster-caption">YOUR<br>NAME</span></div>
+          <div class="card-info"><div><h3>Your Name</h3><p data-en="Romance · Fantasy" data-ps="مینه · خیال">Romance · Fantasy</p></div><span class="year">2016</span></div>
         </article>
-        <article class="card" data-category="movie" data-search="the martian movie science fiction">
-          <div class="poster poster-e"><span class="poster-label">MOVIE</span><strong>THE<br>MARTIAN</strong><small>SCI-FI · ADVENTURE</small></div>
-          <div class="card-info"><div><h3>The Martian</h3><p data-en="Movie · 2015" data-ps="فلم · ۲۰۱۵">Movie · 2015</p></div><span class="card-number">05</span></div>
+        <article class="card" data-category="movie" data-search="the batman movie action crime">
+          <div class="poster poster-five"><span class="poster-label">MOVIE</span><span class="poster-art">B</span><span class="poster-caption">THE<br>BATMAN</span></div>
+          <div class="card-info"><div><h3>The Batman</h3><p data-en="Action · Crime" data-ps="اکشن · جرم">Action · Crime</p></div><span class="year">2022</span></div>
         </article>
-        <article class="card" data-category="series" data-search="our planet nature documentary series">
-          <div class="poster poster-f"><span class="poster-label">SERIES</span><strong>OUR<br>PLANET</strong><small>NATURE · DOCUMENTARY</small></div>
-          <div class="card-info"><div><h3>Our Planet</h3><p data-en="Documentary series · 2019" data-ps="مستند سریال · ۲۰۱۹">Documentary series · 2019</p></div><span class="card-number">06</span></div>
+        <article class="card" data-category="series" data-search="planet earth documentary series nature">
+          <div class="poster poster-six"><span class="poster-label">SERIES</span><span class="poster-art">◉</span><span class="poster-caption">PLANET<br>EARTH</span></div>
+          <div class="card-info"><div><h3>Planet Earth</h3><p data-en="Nature · Documentary" data-ps="طبیعت · مستند">Nature · Documentary</p></div><span class="year">2006</span></div>
         </article>
       </div>
-      <p class="empty-state" id="emptyState" hidden data-en="No titles found. Try another search." data-ps="څه ونه موندل شول. بله کلمه وپلټئ.">No titles found. Try another search.</p>
+      <p class="empty" id="emptyState" hidden data-en="No titles found. Try another search." data-ps="څه ونه موندل شول. بله لټون وازمویئ.">No titles found. Try another search.</p>
     </section>
 
-    <section class="about section" id="about">
-      <p class="eyebrow" data-en="ABOUT FRAME" data-ps="د FRAME په اړه">ABOUT FRAME</p>
-      <div class="about-row"><h2 data-en="One place.<br>Many worlds." data-ps="یو ځای.<br>ډېرې نړۍ.">One place.<br>Many worlds.</h2>
-      <p data-en="FRAME is a simple bilingual discovery guide for anime, movies and series. It helps you browse titles and learn what they are about. It does not host or stream films." data-ps="FRAME د انیمو، فلمونو او سریالونو لپاره یوه ساده دوه‌ژبنۍ لارښود پاڼه ده. دلته نومونه لټولای او د اثارو په اړه معلومات لوستلای شئ. دا پاڼه فلمونه نه ساتي او نه یې خپروي.">FRAME is a simple bilingual discovery guide for anime, movies and series. It helps you browse titles and learn what they are about. It does not host or stream films.</p></div>
+    <section class="about section-wrap" id="about">
+      <div><p class="eyebrow green" data-en="ABOUT FRAME" data-ps="د FRAME په اړه">ABOUT FRAME</p><h2 data-en="A library for every kind of story." data-ps="د هر ډول کیسو لپاره یو کتابتون.">A library for every kind of story.</h2></div>
+      <p data-en="FRAME helps you discover anime, movies and series. Browse the collection, search by title, and find something worth watching. This is a discovery catalogue, not a video-streaming service." data-ps="FRAME له تاسو سره د انیمو، فلمونو او سریالونو په موندلو کې مرسته کوي. دا د اثارو د پېژندلو کتابتون دی، د ویډیو خپرولو خدمت نه دی.">FRAME helps you discover anime, movies and series. Browse the collection, search by title, and find something worth watching. This is a discovery catalogue, not a video-streaming service.</p>
     </section>
   </main>
 
-  <footer class="footer"><a class="logo" href="#home"><span class="logo-mark">F</span> FRAME<span class="logo-dot">.</span></a><span data-en="Discover stories. Respect creators." data-ps="کیسې ومومئ، د جوړوونکو حقونه درناوی کړئ.">Discover stories. Respect creators.</span><a href="#home" data-en="BACK TO TOP ↑" data-ps="سر ته ↑">BACK TO TOP ↑</a></footer>
+  <footer><a class="brand" href="#"><span class="brand-mark">F</span>FRAME<span class="brand-dot">.</span></a><p>© 2026 FRAME. <span data-en="Discover stories." data-ps="کیسې ومومئ.">Discover stories.</span></p></footer>
+  <script src="script.js"></script>
 </body>
 </html>

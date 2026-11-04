@@ -1,12 +1,11 @@
-# FRAME — Bilingual Anime, Movies & Series Guide
+# FRAME Cinema Catalogue
 
-A responsive English/Pashto catalogue website made with HTML, CSS and JavaScript.
+A bilingual (English/Pashto) responsive catalogue for discovering anime, movies and series.
 
 ## Files
-- `index.html` — page structure and sample title cards
-- `styles.css` — dark responsive design, poster artwork and Pashto RTL layout
-- `script.js` — language switch, mobile menu, search and category filters
+- `index.html` — page structure and sample catalogue
+- `styles.css` — cinema-inspired dark theme and responsive layout
+- `script.js` — language toggle, category filters and search
 
 ## Publish
-Upload these three files to the root of your GitHub Pages repository and commit the changes.
-This is a discovery/catalogue demo only; it does not host or stream copyrighted films or shows.
+Upload these four files to the root of your GitHub repository and commit the changes. GitHub Pages will publish the update. This is a discovery catalogue, not a video-streaming service.

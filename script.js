@@ -1,51 +1,41 @@
-const languageToggle = document.getElementById("languageToggle");
-const menuToggle = document.getElementById("menuToggle");
-const nav = document.getElementById("nav");
-const searchInput = document.getElementById("searchInput");
 const filters = [...document.querySelectorAll(".filter")];
 const cards = [...document.querySelectorAll(".card")];
+const searchInput = document.getElementById("searchInput");
 const emptyState = document.getElementById("emptyState");
-let language = "en";
+const resultCount = document.getElementById("resultCount");
 let activeFilter = "all";
-
-function setLanguage(nextLanguage) {
-  language = nextLanguage;
-  document.documentElement.lang = language;
-  document.body.dir = language === "ps" ? "rtl" : "ltr";
-  document.querySelectorAll("[data-en][data-ps]").forEach((element) => {
-    element.innerHTML = element.dataset[language];
-  });
-  if (searchInput) {
-    searchInput.placeholder = searchInput.dataset[`${language}Placeholder`];
-  }
-  languageToggle.textContent = language === "en" ? "پښتو" : "English";
-  languageToggle.setAttribute("aria-label", language === "en" ? "Switch to Pashto" : "Switch to English");
-}
+let language = "en";
 
 function updateCards() {
-  const term = searchInput.value.trim().toLowerCase();
-  let visibleCount = 0;
-  cards.forEach((card) => {
-    const matchesCategory = activeFilter === "all" || card.dataset.category === activeFilter;
-    const matchesSearch = card.dataset.search.toLowerCase().includes(term) ||
-      card.querySelector("h3").textContent.toLowerCase().includes(term);
-    const visible = matchesCategory && matchesSearch;
-    card.hidden = !visible;
-    if (visible) visibleCount++;
+  const query = searchInput.value.trim().toLowerCase();
+  let visible = 0;
+  cards.forEach(card => {
+    const categoryMatch = activeFilter === "all" || card.dataset.category === activeFilter;
+    const searchMatch = (card.dataset.search + " " + card.innerText).toLowerCase().includes(query);
+    const show = categoryMatch && searchMatch;
+    card.hidden = !show;
+    if (show) visible++;
   });
-  emptyState.hidden = visibleCount !== 0;
+  emptyState.hidden = visible !== 0;
+  resultCount.textContent = `${String(visible).padStart(2, "0")} ${language === "en" ? "TITLES" : "عنوانونه"}`;
 }
-
-languageToggle.addEventListener("click", () => setLanguage(language === "en" ? "ps" : "en"));
-menuToggle.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-});
-nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => nav.classList.remove("open")));
-searchInput.addEventListener("input", updateCards);
-filters.forEach((button) => button.addEventListener("click", () => {
+filters.forEach(button => button.addEventListener("click", () => {
   activeFilter = button.dataset.filter;
-  filters.forEach((item) => item.classList.toggle("active", item === button));
+  filters.forEach(item => item.classList.toggle("active", item === button));
   updateCards();
 }));
-setLanguage("en");
+searchInput.addEventListener("input", updateCards);
+
+document.getElementById("langToggle").addEventListener("click", () => {
+  language = language === "en" ? "ps" : "en";
+  document.documentElement.lang = language;
+  document.documentElement.dir = language === "ps" ? "rtl" : "ltr";
+  document.body.dir = language === "ps" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-en][data-ps]").forEach(element => {
+    element.innerHTML = element.dataset[language];
+  });
+  searchInput.placeholder = searchInput.dataset[`${language}Placeholder`];
+  document.getElementById("langToggle").textContent = language === "en" ? "پښتو" : "English";
+  updateCards();
+});
+updateCards();
