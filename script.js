@@ -24,27 +24,27 @@ let activeFilter = "all";
 let favorites = [];
 try { favorites = JSON.parse(localStorage.getItem("frameXFavorites") || "[]"); } catch (_) { favorites = []; }
 const grid = document.getElementById("cardsGrid");
+const newReleasesGrid = document.getElementById("newReleasesGrid");
+const newReleaseIds = [4, 2, 8, 11, 16, 14];
 const search = document.getElementById("searchInput");
 const modal = document.getElementById("detailModal");
 
 function typeLabel(type){return language==="ps"?({anime:"انیمي",movie:"فلم",series:"سریال"}[type]):({anime:"ANIME",movie:"MOVIE",series:"SERIES"}[type]);}
-function render(){
- const q=search.value.trim().toLowerCase();
- const list=titles.filter(t=>(activeFilter==="all"||(activeFilter==="favorites"?favorites.includes(t.id):t.type===activeFilter)) &&
-   [t.title,t.psTitle,t.genre,t.psGenre].join(" ").toLowerCase().includes(q));
- grid.innerHTML=list.map(t=>`
+function makeCard(t, isNew=false){
+ return `
   <article class="title-card" data-id="${t.id}" tabindex="0" role="button" aria-label="${t.title}">
    <div class="poster" style="background:${t.tone}">
     <span class="poster-index">FX / ${String(t.id).padStart(3,"0")}</span>
+    ${isNew?`<span class="new-badge" data-en="NEW" data-ps="نوی">NEW</span>`:""}
     <button class="favorite-btn ${favorites.includes(t.id)?"saved":""}" type="button" aria-label="${favorites.includes(t.id)?"Remove from favorites":"Add to favorites"}">${favorites.includes(t.id)?"★":"☆"}</button>
     <span class="poster-word">${t.art}</span><span class="poster-type">${typeLabel(t.type)}</span>
    </div>
    <div class="card-body"><div class="card-top"><span>${typeLabel(t.type)}</span><span>${t.year}</span></div>
     <h3>${language==="ps"?t.psTitle:t.title}</h3><p>${language==="ps"?t.psGenre:t.genre}</p></div>
-  </article>`).join("");
- document.getElementById("resultCount").textContent=`${list.length} ${language==="ps"?"عنوانونه":"TITLES"}`;
- document.getElementById("emptyState").hidden=list.length!==0;
- grid.querySelectorAll(".title-card").forEach(card=>{
+  </article>`;
+}
+function attachCardActions(target){
+ target.querySelectorAll(".title-card").forEach(card=>{
   card.addEventListener("click",()=>openDetails(Number(card.dataset.id)));
   card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetails(Number(card.dataset.id));}});
   card.querySelector(".favorite-btn").addEventListener("click",e=>{
@@ -55,6 +55,18 @@ function render(){
    render();
   });
  });
+}
+function render(){
+ const q=search.value.trim().toLowerCase();
+ const list=titles.filter(t=>(activeFilter==="all"||(activeFilter==="favorites"?favorites.includes(t.id):t.type===activeFilter)) &&
+   [t.title,t.psTitle,t.genre,t.psGenre].join(" ").toLowerCase().includes(q));
+ grid.innerHTML=list.map(t=>makeCard(t)).join("");
+ document.getElementById("resultCount").textContent=`${list.length} ${language==="ps"?"عنوانونه":"TITLES"}`;
+ document.getElementById("emptyState").hidden=list.length!==0;
+ const featured=newReleaseIds.map(id=>titles.find(t=>t.id===id)).filter(Boolean);
+ newReleasesGrid.innerHTML=featured.map(t=>makeCard(t,true)).join("");
+ attachCardActions(grid);
+ attachCardActions(newReleasesGrid);
 }
 function openDetails(id){
  const t=titles.find(x=>x.id===id); if(!t)return;
