@@ -15,3 +15,6 @@ A bilingual English/Pashto catalogue for discovering anime, movies and series.
 5. Open your GitHub Pages website. If the old version appears, press **Ctrl + F5**.
 
 This is an information catalogue. It does not host or stream films.
+
+## Title details
+Each title card opens an information panel with its summary, genre, release year, audio-language note, subtitle note, and a rating status. Ratings are marked as unverified rather than showing invented scores; audio and subtitle availability can differ by release.

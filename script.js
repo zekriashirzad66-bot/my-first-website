@@ -53,7 +53,19 @@ function openDetails(id){
  document.getElementById("modalMeta").textContent=`${typeLabel(t.type)} · ${t.year}`;
  document.getElementById("modalTitle").textContent=language==="ps"?t.psTitle:t.title;
  document.getElementById("modalDescription").textContent=language==="ps"?t.ps:t.en;
- document.getElementById("modalTags").innerHTML=`<span>${language==="ps"?t.psGenre:t.genre}</span><span>${t.year}</span>`;
+ const detailLabels = language==="ps"
+  ? {genre:"ژانر",year:"کال",rating:"درجه‌بندي",audio:"اصلي غږ",subs:"فرعي لیکنې"}
+  : {genre:"GENRE",year:"RELEASE YEAR",rating:"RATING",audio:"AUDIO",subs:"SUBTITLES"};
+ const detailValues = language==="ps"
+  ? [t.psGenre,String(t.year),"تر اوسه نه دی تایید شوی","د اصلي خپرونې ژبه","د خپرونې له نسخې سره توپیر لري"]
+  : [t.genre,String(t.year),"Not verified","Original release audio","Varies by release"];
+ document.getElementById("modalTags").innerHTML=detailLabels
+  ? detailLabels.genre+"|"+detailValues[0] : "";
+ document.getElementById("modalTags").innerHTML=[
+  [detailLabels.genre,detailValues[0]],[detailLabels.year,detailValues[1]],
+  [detailLabels.rating,detailValues[2]],[detailLabels.audio,detailValues[3]],
+  [detailLabels.subs,detailValues[4]]
+ ].map(([label,value])=>`<div class="detail-row"><span>${label}</span><strong>${value}</strong></div>`).join("");
  modal.classList.add("open");modal.setAttribute("aria-hidden","false");
 }
 function closeDetails(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");}
