@@ -33,3 +33,11 @@ body.ps .favorite-btn{right:auto;left:12px}
 .release-note{margin:18px 0 0;color:#77847b;font-size:10px;line-height:1.7}
 body.ps .new-badge{left:auto;right:12px}
 @media(max-width:600px){.releases-grid{grid-template-columns:1fr 1fr}}
+
+
+/* Real title artwork (Wikipedia thumbnails where available) */
+.poster-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.94}
+.poster .poster-word{position:relative;z-index:1;text-shadow:0 3px 18px #000,0 1px 4px #000}
+.poster-index,.poster-type,.favorite-btn,.new-badge{z-index:4}
+.modal-poster-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.modal-poster .poster-word{position:relative;z-index:1;text-shadow:0 3px 18px #000,0 1px 4px #000}

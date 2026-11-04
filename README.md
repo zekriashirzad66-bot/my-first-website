@@ -26,3 +26,6 @@ Each title card opens an information panel with its summary, genre, release year
 
 
 New Releases section: highlights selected titles newly added to the FRAME X catalogue. The label refers to additions to this website, not necessarily recent premiere dates.
+
+
+Poster artwork update: the site now attempts to load available title thumbnails from English Wikipedia pages. If a page has no thumbnail or the image service is unavailable, the original FRAME X graphic remains as a fallback. Image rights belong to their respective owners; this is a discovery catalogue, not a streaming service.

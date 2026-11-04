@@ -29,6 +29,35 @@ const newReleaseIds = [4, 2, 8, 11, 16, 14];
 const search = document.getElementById("searchInput");
 const modal = document.getElementById("detailModal");
 
+// Load available title artwork from Wikipedia article thumbnails (no API key required).
+const wikiPages = {
+  1:"Spirited_Away", 2:"Your_Name_(2016_film)", 3:"A_Silent_Voice_(film)",
+  4:"Demon_Slayer:_Kimetsu_no_Yaiba", 5:"Attack_on_Titan", 6:"One_Piece",
+  7:"Interstellar_(film)", 8:"The_Martian_(film)", 9:"Inception", 10:"The_Dark_Knight",
+  11:"Coco_(2017_film)", 12:"The_Lion_King", 13:"Planet_Earth_(2006_TV_series)",
+  14:"Our_Planet", 15:"Sherlock_(TV_series)", 16:"Stranger_Things",
+  17:"Planet_Earth_II", 18:"Blue_Planet_II"
+};
+async function loadPosterImages(){
+  await Promise.all(titles.map(async t=>{
+    try {
+      const page=wikiPages[t.id] || encodeURIComponent(t.title.replaceAll(" ","_"));
+      const response=await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${page}`);
+      if(!response.ok) return;
+      const data=await response.json();
+      const image=data.thumbnail?.source || data.originalimage?.source;
+      if(!image) return;
+      t.posterUrl=image;
+      document.querySelectorAll(`.title-card[data-id="${t.id}"] .poster`).forEach(p=>{
+        if(!p.querySelector(".poster-image")){
+          const img=document.createElement("img"); img.className="poster-image"; img.src=image;
+          img.alt=`${t.title} poster`; img.loading="lazy";
+          img.onerror=()=>img.remove(); p.prepend(img);
+        }
+      });
+    } catch (_) { /* Keep the designed fallback if an image is unavailable. */ }
+  }));
+}
 function typeLabel(type){return language==="ps"?({anime:"انیمي",movie:"فلم",series:"سریال"}[type]):({anime:"ANIME",movie:"MOVIE",series:"SERIES"}[type]);}
 function makeCard(t, isNew=false){
  return `
@@ -71,7 +100,7 @@ function render(){
 function openDetails(id){
  const t=titles.find(x=>x.id===id); if(!t)return;
  document.getElementById("modalPoster").style.background=t.tone;
- document.getElementById("modalPoster").innerHTML=`<span class="poster-word">${t.art}</span>`;
+ document.getElementById("modalPoster").innerHTML=`${t.posterUrl?`<img class="modal-poster-image" src="${t.posterUrl}" alt="${t.title} poster">`:""}<span class="poster-word">${t.art}</span>`;
  document.getElementById("modalMeta").textContent=`${typeLabel(t.type)} · ${t.year}`;
  document.getElementById("modalTitle").textContent=language==="ps"?t.psTitle:t.title;
  document.getElementById("modalDescription").textContent=language==="ps"?t.ps:t.en;
@@ -116,3 +145,4 @@ document.getElementById("languageToggle").addEventListener("click",()=>{
 document.getElementById("menuToggle").addEventListener("click",()=>document.getElementById("nav").classList.toggle("open"));
 document.querySelectorAll("#nav a").forEach(a=>a.addEventListener("click",()=>document.getElementById("nav").classList.remove("open")));
 render();
+loadPosterImages();
