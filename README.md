@@ -1,13 +1,12 @@
-# MY FIRST WEBSITE
+# FRAME — Bilingual Anime, Movies & Series Guide
 
-A responsive, dark beginner website with a lime accent, made with plain HTML, CSS, and JavaScript. No installation or build tools are needed.
+A responsive English/Pashto catalogue website made with HTML, CSS and JavaScript.
 
 ## Files
+- `index.html` — page structure and sample title cards
+- `styles.css` — dark responsive design, poster artwork and Pashto RTL layout
+- `script.js` — language switch, mobile menu, search and category filters
 
-- `index.html` contains the page content and its three sections: Home, About, and Contact.
-- `styles.css` controls the dark layout, colors, typography, buttons, animations, and responsive design for phones and larger screens.
-- `script.js` adds the mobile navigation, gentle section reveal effects, a demo confirmation when the contact form is submitted, and the current year in the footer.
-
-## View it
-
-Open `index.html` in a web browser. The contact form is a front-end demo: it displays a confirmation but does not send or store messages. The sample `hello@example.com` address can be changed to a real address in `index.html`.
+## Publish
+Upload these three files to the root of your GitHub Pages repository and commit the changes.
+This is a discovery/catalogue demo only; it does not host or stream copyrighted films or shows.
